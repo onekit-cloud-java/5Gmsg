@@ -6,7 +6,7 @@
 
     <groupId>cn.onekit.x2x.cloud</groupId>
     <artifactId>nut5g</artifactId>
-    <version>4.7.0</version>
+    <version>4.7.2</version>
     <build>
         <plugins>
             <plugin>

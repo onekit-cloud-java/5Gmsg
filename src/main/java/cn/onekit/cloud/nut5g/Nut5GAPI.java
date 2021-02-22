@@ -3,8 +3,27 @@ package cn.onekit.cloud.nut5g;
 
 import cn.onekit.cloud.nut5g.request.*;
 import cn.onekit.cloud.nut5g.response.*;
+import cn.onekit.thekit.SIGN;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public interface Nut5GAPI {
+
+    default boolean _checkSign( String signature,String token,String timestamp,String nonce) throws Exception {
+        List<String> list = Arrays.asList(token, timestamp, nonce);
+        list.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o1);
+            }
+        });
+        String str = String.join("", list);
+
+        return new SIGN(SIGN.Method.HMACSHA256).sign(str).equals(signature);
+    }
 
     AccessTokenResponse accessToken(AccessTokenRequest request) throws Nut5GError;
 
