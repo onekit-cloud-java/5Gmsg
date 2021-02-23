@@ -27,9 +27,9 @@ public interface Nut5GAPI {
 
     AccessTokenResponse accessToken(AccessTokenRequest request) throws Nut5GError;
 
-    Nut5GResponse chatBotInfo(ChatBotInfoRequest request) throws Nut5GError;
+    void chatBotInfo(String accessToken,ChatBotInfoRequest request) throws Nut5GError;
 
-    Nut5GResponse chatBotInfomenu(ChatBotInfomenuRequest request) throws Nut5GError;
+    void chatBotInfomenu(ChatBotInfomenuRequest request) throws Nut5GError;
 
     FindchatBotInfoResponse findchatBotInfo() throws Nut5GError;
 
