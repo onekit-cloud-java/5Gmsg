@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g.notification;
+package cn.onekit.cloud.nut5g.notification.request;
 
 import cn.onekit.cloud.nut5g.request.MessagesRequest;
 
@@ -15,7 +15,8 @@ public class ReceivemessageNotification {
     private String priority;
     private String origUser;
     private String inReplyTo;
-    public enum  reportRequest{
+    private ReportRequest reportRequest;
+    public enum  ReportRequest{
         failed,
         delivered
     }
@@ -414,5 +415,13 @@ public class ReceivemessageNotification {
 
     public void setInReplyTo(String inReplyTo) {
         this.inReplyTo = inReplyTo;
+    }
+
+    public ReportRequest getReportRequest() {
+        return reportRequest;
+    }
+
+    public void setReportRequest(ReportRequest reportRequest) {
+        this.reportRequest = reportRequest;
     }
 }

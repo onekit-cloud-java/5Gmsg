@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g.notification;
+package cn.onekit.cloud.nut5g.notification.request;
 
 import java.util.List;
 @SuppressWarnings("unused")

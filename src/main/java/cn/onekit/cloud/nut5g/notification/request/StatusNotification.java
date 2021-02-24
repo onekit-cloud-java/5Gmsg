@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g.notification;
+package cn.onekit.cloud.nut5g.notification.request;
 
 import java.util.List;
 @SuppressWarnings("unused")
@@ -8,7 +8,8 @@ public class StatusNotification {
     public static class DeliveryInfo{
         private String messageId;
         private String dateTime;
-        public enum status{
+        private Status status;
+        public enum Status{
             sent,
             failed,
             delivered,
@@ -21,6 +22,14 @@ public class StatusNotification {
         private String errorMessage;
         private String destinationAddress;
         private String senderAddress;
+
+        public Status getStatus() {
+            return status;
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
 
         public String getMessageId() {
             return messageId;

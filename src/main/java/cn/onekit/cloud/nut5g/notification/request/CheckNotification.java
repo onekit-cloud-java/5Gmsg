@@ -1,11 +1,12 @@
-package cn.onekit.cloud.nut5g.notification;
+package cn.onekit.cloud.nut5g.notification.request;
 @SuppressWarnings("unused")
 public class CheckNotification {
-    public enum type{
+    public enum Type{
         chatbotInformation,
         media,
         message
     }
+    private Type type;
     private String result;
     private String description;
     private String time;
@@ -41,5 +42,13 @@ public class CheckNotification {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }

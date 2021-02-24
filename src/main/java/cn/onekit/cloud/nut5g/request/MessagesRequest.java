@@ -17,9 +17,9 @@ public class MessagesRequest {
     private String inReplyTo;
     private boolean storeSupported;
     private String smsContent;
+    private ReportRequest reportRequest;
 
-
-    public enum reportRequest{
+    public enum ReportRequest{
         sent,
         failed,
         delivered,
@@ -882,5 +882,13 @@ public class MessagesRequest {
 
     public void setSmsContent(String smsContent) {
         this.smsContent = smsContent;
+    }
+
+    public ReportRequest getReportRequest() {
+        return reportRequest;
+    }
+
+    public void setReportRequest(ReportRequest reportRequest) {
+        this.reportRequest = reportRequest;
     }
 }
