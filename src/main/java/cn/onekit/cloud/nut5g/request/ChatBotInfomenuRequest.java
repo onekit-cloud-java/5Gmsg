@@ -1,12 +1,12 @@
 package cn.onekit.cloud.nut5g.request;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChatBotInfomenuRequest {
     private BigMenu menu;
 
     public static class BigMenu{
-        private ArrayList<Entries> entries;
+        private List<Entries> entries;
 
         public static class Entries{
             private Reply reply;
@@ -48,7 +48,7 @@ public class ChatBotInfomenuRequest {
 
             public static class smallMenu{
                 private String displayText;
-                private ArrayList<Entries> entries;
+                private List<Entries> entries;
 
                 public String getDisplayText() {
                     return displayText;
@@ -58,11 +58,11 @@ public class ChatBotInfomenuRequest {
                     this.displayText = displayText;
                 }
 
-                public ArrayList<Entries> getEntries() {
+                public List<Entries> getEntries() {
                     return entries;
                 }
 
-                public void setEntries(ArrayList<Entries> entries) {
+                public void setEntries(List<Entries> entries) {
                     this.entries = entries;
                 }
             }
@@ -158,11 +158,11 @@ public class ChatBotInfomenuRequest {
             }
         }
 
-        public ArrayList<Entries> getEntries() {
+        public List<Entries> getEntries() {
             return entries;
         }
 
-        public void setEntries(ArrayList<Entries> entries) {
+        public void setEntries(List<Entries> entries) {
             this.entries = entries;
         }
     }

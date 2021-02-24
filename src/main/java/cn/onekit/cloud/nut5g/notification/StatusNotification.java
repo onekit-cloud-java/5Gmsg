@@ -1,9 +1,9 @@
-package cn.onekit.cloud.nut5g.request;
+package cn.onekit.cloud.nut5g.notification;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class StatusRequest {
-    private ArrayList<DeliveryInfo> deliveryInfoList;
+public class StatusNotification {
+    private List<DeliveryInfo> deliveryInfoList;
 
     public static class DeliveryInfo{
         private String messageId;
@@ -71,11 +71,11 @@ public class StatusRequest {
         }
     }
 
-    public ArrayList<DeliveryInfo> getDeliveryInfoList() {
+    public List<DeliveryInfo> getDeliveryInfoList() {
         return deliveryInfoList;
     }
 
-    public void setDeliveryInfoList(ArrayList<DeliveryInfo> deliveryInfoList) {
+    public void setDeliveryInfoList(List<DeliveryInfo> deliveryInfoList) {
         this.deliveryInfoList = deliveryInfoList;
     }
 }

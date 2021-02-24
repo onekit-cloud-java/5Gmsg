@@ -1,6 +1,6 @@
-package cn.onekit.cloud.nut5g.request;
+package cn.onekit.cloud.nut5g.notification;
 
-public class CheckRequest {
+public class CheckNotification {
     public enum type{
         chatbotInformation,
         media,

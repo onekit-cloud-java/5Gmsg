@@ -1,10 +1,10 @@
 package cn.onekit.cloud.nut5g.request;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChatBotInfoRequest {
     private String serviceDescription;
-    private ArrayList<String> category;
+    private List<String> category;
     private String callBackNumber;
     private String provider;
     private double longitude;
@@ -25,11 +25,11 @@ public class ChatBotInfoRequest {
         this.serviceDescription = serviceDescription;
     }
 
-    public ArrayList<String> getCategory() {
+    public List<String> getCategory() {
         return category;
     }
 
-    public void setCategory(ArrayList<String> category) {
+    public void setCategory(List<String> category) {
         this.category = category;
     }
 

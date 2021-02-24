@@ -1,15 +1,15 @@
 package cn.onekit.cloud.nut5g.request;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MessagesRequest {
     private String messageId;
-    private ArrayList<Message> messageList;
-    private ArrayList<String> destinationAddress;
+    private List<Message> messageList;
+    private List<String> destinationAddress;
     private String senderAddress;
     private String conversationId;
     private String contributionId;
-    private ArrayList<ServiceCapability> serviceCapability;
+    private List<ServiceCapability> serviceCapability;
     private String trafficType;
     private boolean smsSupported;
     private String imFormat;
@@ -43,6 +43,8 @@ public class MessagesRequest {
     }
 
     public static abstract class Message{
+        private final ContentType contentType;
+
         public enum ContentType{
             text("text/plain"),
             botsuggestion("application/vnd.gsma.botsuggestion.v1.0+json"),
@@ -56,7 +58,7 @@ public class MessagesRequest {
         private String contentEncoding;
 
         public Message(ContentType contentType){
-            
+         this.contentType=contentType;
         }
 
         public String getContentEncoding() {
@@ -86,7 +88,7 @@ public class MessagesRequest {
 
     public static class BotsuggestionMessage extends Message{
         public static class ContentText {
-            private ArrayList<Suggestion> suggestions;
+            private List<Suggestion> suggestions;
 
             public static class Suggestion {
                 private Reply reply;
@@ -206,7 +208,7 @@ public class MessagesRequest {
             super(ContentType.file);
         }
 
-        private ArrayList<ContentText> contentText;
+        private List<ContentText> contentText;
 
         public static class ContentText{
             private String type;
@@ -313,8 +315,8 @@ public class MessagesRequest {
                     public static class Layout{
                         private String cardOrientation;
                         private String imageAlignment;
-                        private ArrayList<String> titleFontStyle;
-                        private ArrayList<String> descriptionFontStyle;
+                        private List<String> titleFontStyle;
+                        private List<String> descriptionFontStyle;
                         private String style;
 
                         public String getCardOrientation() {
@@ -333,19 +335,19 @@ public class MessagesRequest {
                             this.imageAlignment = imageAlignment;
                         }
 
-                        public ArrayList<String> getTitleFontStyle() {
+                        public List<String> getTitleFontStyle() {
                             return titleFontStyle;
                         }
 
-                        public void setTitleFontStyle(ArrayList<String> titleFontStyle) {
+                        public void setTitleFontStyle(List<String> titleFontStyle) {
                             this.titleFontStyle = titleFontStyle;
                         }
 
-                        public ArrayList<String> getDescriptionFontStyle() {
+                        public List<String> getDescriptionFontStyle() {
                             return descriptionFontStyle;
                         }
 
-                        public void setDescriptionFontStyle(ArrayList<String> descriptionFontStyle) {
+                        public void setDescriptionFontStyle(List<String> descriptionFontStyle) {
                             this.descriptionFontStyle = descriptionFontStyle;
                         }
 
@@ -362,7 +364,7 @@ public class MessagesRequest {
                         private String title;
                         private String description;
                         private Media media;
-                        private ArrayList<Suggestion> suggestions;
+                        private List<Suggestion> suggestions;
 
                         public static class Media{
                             private String mediaUrl;
@@ -601,11 +603,11 @@ public class MessagesRequest {
                             this.media = media;
                         }
 
-                        public ArrayList<Suggestion> getSuggestions() {
+                        public List<Suggestion> getSuggestions() {
                             return suggestions;
                         }
 
-                        public void setSuggestions(ArrayList<Suggestion> suggestions) {
+                        public void setSuggestions(List<Suggestion> suggestions) {
                             this.suggestions = suggestions;
                         }
                     }
@@ -664,19 +666,19 @@ public class MessagesRequest {
         this.messageId = messageId;
     }
 
-    public ArrayList<Message> getMessageList() {
+    public List<Message> getMessageList() {
         return messageList;
     }
 
-    public void setMessageList(ArrayList<Message> messageList) {
+    public void setMessageList(List<Message> messageList) {
         this.messageList = messageList;
     }
 
-    public ArrayList<String> getDestinationAddress() {
+    public List<String> getDestinationAddress() {
         return destinationAddress;
     }
 
-    public void setDestinationAddress(ArrayList<String> destinationAddress) {
+    public void setDestinationAddress(List<String> destinationAddress) {
         this.destinationAddress = destinationAddress;
     }
 
@@ -704,11 +706,11 @@ public class MessagesRequest {
         this.contributionId = contributionId;
     }
 
-    public ArrayList<ServiceCapability> getServiceCapability() {
+    public List<ServiceCapability> getServiceCapability() {
         return serviceCapability;
     }
 
-    public void setServiceCapability(ArrayList<ServiceCapability> serviceCapability) {
+    public void setServiceCapability(List<ServiceCapability> serviceCapability) {
         this.serviceCapability = serviceCapability;
     }
 

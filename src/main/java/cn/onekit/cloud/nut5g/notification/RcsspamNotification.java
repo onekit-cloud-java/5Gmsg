@@ -1,17 +1,17 @@
-package cn.onekit.cloud.nut5g.request;
+package cn.onekit.cloud.nut5g.notification;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class RcsspamRequest {
-    private ArrayList<String> messageId;
+public class RcsspamNotification {
+    private List<String> messageId;
     private String spamType;
     private String freeText;
 
-    public ArrayList<String> getMessageId() {
+    public List<String> getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(ArrayList<String> messageId) {
+    public void setMessageId(List<String> messageId) {
         this.messageId = messageId;
     }
 

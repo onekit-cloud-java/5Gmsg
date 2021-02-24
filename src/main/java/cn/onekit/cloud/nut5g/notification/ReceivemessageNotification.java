@@ -1,10 +1,10 @@
-package cn.onekit.cloud.nut5g.request;
+package cn.onekit.cloud.nut5g.notification;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ReceivemessageRequest {
+public class ReceivemessageNotification {
     private String messageId;
-    private ArrayList<Message> messageList;
+    private List<Message> messageList;
     private String dateTime;
     private String senderAddress;
     private String destinationAddress;
@@ -19,6 +19,8 @@ public class ReceivemessageRequest {
     }
 
     public static abstract class Message{
+        private final ContentType contentType;
+
         public enum ContentType{
             text("text/plain"),
             botsuggestion("application/vnd.gsma.botsuggestion.v1.0+json"),
@@ -33,7 +35,7 @@ public class ReceivemessageRequest {
         }
 
         public Message(ContentType contentType){
-
+this.contentType=contentType;
         }
 
         private String contentEncoding;
@@ -68,7 +70,7 @@ public class ReceivemessageRequest {
         public FileMessage() {
             super(ContentType.file);
         }
-        private ArrayList<ContentText> contentText;
+        private List<ContentText> contentText;
 
         public static class ContentText{
             private String type;
@@ -127,11 +129,11 @@ public class ReceivemessageRequest {
             }
         }
 
-        public ArrayList<ContentText> getContentText() {
+        public List<ContentText> getContentText() {
             return contentText;
         }
 
-        public void setContentText(ArrayList<ContentText> contentText) {
+        public void setContentText(List<ContentText> contentText) {
             this.contentText = contentText;
         }
     }
@@ -332,11 +334,11 @@ public class ReceivemessageRequest {
         this.messageId = messageId;
     }
 
-    public ArrayList<Message> getMessageList() {
+    public List<Message> getMessageList() {
         return messageList;
     }
 
-    public void setMessageList(ArrayList<Message> messageList) {
+    public void setMessageList(List<Message> messageList) {
         this.messageList = messageList;
     }
 

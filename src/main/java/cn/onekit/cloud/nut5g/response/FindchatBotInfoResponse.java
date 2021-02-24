@@ -1,6 +1,6 @@
 package cn.onekit.cloud.nut5g.response;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FindchatBotInfoResponse {
     private String accessNo;
@@ -18,7 +18,7 @@ public class FindchatBotInfoResponse {
     private String url;
     private int version;
     private String provider;
-    private ArrayList<String> category;
+    private List<String> category;
     private String serviceDescription;
     private String longitude;
     private String latitude;
@@ -154,11 +154,11 @@ public class FindchatBotInfoResponse {
         this.provider = provider;
     }
 
-    public ArrayList<String> getCategory() {
+    public List<String> getCategory() {
         return category;
     }
 
-    public void setCategory(ArrayList<String> category) {
+    public void setCategory(List<String> category) {
         this.category = category;
     }
 

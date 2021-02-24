@@ -1,11 +1,11 @@
 package cn.onekit.cloud.nut5g.request;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MessagesrevokeRequest {
     private String messageId;
     private final String status = "RevokeRequested";
-    private ArrayList<String> destinationAddress;
+    private List<String> destinationAddress;
 
     public String getMessageId() {
         return messageId;
@@ -19,11 +19,11 @@ public class MessagesrevokeRequest {
         return status;
     }
 
-    public ArrayList<String> getDestinationAddress() {
+    public List<String> getDestinationAddress() {
         return destinationAddress;
     }
 
-    public void setDestinationAddress(ArrayList<String> destinationAddress) {
+    public void setDestinationAddress(List<String> destinationAddress) {
         this.destinationAddress = destinationAddress;
     }
 }

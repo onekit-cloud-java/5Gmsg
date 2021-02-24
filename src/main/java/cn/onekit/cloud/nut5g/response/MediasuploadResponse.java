@@ -1,9 +1,9 @@
 package cn.onekit.cloud.nut5g.response;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MediasuploadResponse extends Nut5GResponse{
-    private ArrayList<FileInfo> fileInfo;
+    private List<FileInfo> fileInfo;
     private int fileCount;
     private int totalCount;
 
@@ -73,11 +73,11 @@ public class MediasuploadResponse extends Nut5GResponse{
         }
     }
 
-    public ArrayList<FileInfo> getFileInfo() {
+    public List<FileInfo> getFileInfo() {
         return fileInfo;
     }
 
-    public void setFileInfo(ArrayList<FileInfo> fileInfo) {
+    public void setFileInfo(List<FileInfo> fileInfo) {
         this.fileInfo = fileInfo;
     }
 
