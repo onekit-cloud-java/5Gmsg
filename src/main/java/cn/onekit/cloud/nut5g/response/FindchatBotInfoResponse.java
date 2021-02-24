@@ -1,7 +1,7 @@
 package cn.onekit.cloud.nut5g.response;
 
 import java.util.List;
-
+@SuppressWarnings("unused")
 public class FindchatBotInfoResponse {
     private String accessNo;
     private String domain;

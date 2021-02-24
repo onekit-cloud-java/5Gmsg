@@ -1,6 +1,6 @@
 package cn.onekit.cloud.nut5g.response;
-
-public class MessagesrevokeResponse extends Nut5GResponse{
+@SuppressWarnings("unused")
+public class MessagesrevokeResponse {
     private String messageId;
 
     public String getMessageId() {

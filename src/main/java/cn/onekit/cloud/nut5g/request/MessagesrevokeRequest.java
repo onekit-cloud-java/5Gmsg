@@ -1,7 +1,7 @@
 package cn.onekit.cloud.nut5g.request;
 
 import java.util.List;
-
+@SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class MessagesrevokeRequest {
     private String messageId;
     private final String status = "RevokeRequested";

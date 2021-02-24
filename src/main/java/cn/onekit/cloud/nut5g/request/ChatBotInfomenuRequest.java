@@ -1,7 +1,7 @@
 package cn.onekit.cloud.nut5g.request;
 
 import java.util.List;
-
+@SuppressWarnings("unused")
 public class ChatBotInfomenuRequest {
     private BigMenu menu;
 
@@ -67,26 +67,14 @@ public class ChatBotInfomenuRequest {
                 }
             }
 
-            public static class Action{
-                private DialerAction dialerAction;
+            public static class Action {
+                private UrlAction urlAction;
                 private String displayText;
                 private Postback postback;
+                private DialerAction dialerAction;
 
-                public static class Postback{
-                    private String data;
-
-                    public String getData() {
-                        return data;
-                    }
-
-                    public void setData(String data) {
-                        this.data = data;
-                    }
-                }
-
-                public static class DialerAction{
+                public static class  DialerAction{
                     private DialPhoneNumber dialPhoneNumber;
-
                     public static class DialPhoneNumber{
                         private String phoneNumber;
 
@@ -108,12 +96,48 @@ public class ChatBotInfomenuRequest {
                     }
                 }
 
-                public DialerAction getDialerAction() {
-                    return dialerAction;
+                public static class Postback {
+                    private String data;
+
+                    public String getData() {
+                        return data;
+                    }
+
+                    public void setData(String data) {
+                        this.data = data;
+                    }
                 }
 
-                public void setDialerAction(DialerAction dialerAction) {
-                    this.dialerAction = dialerAction;
+                public static class UrlAction {
+                    private OpenUrl openUrl;
+
+                    public static class OpenUrl {
+                        private String url;
+
+                        public String getUrl() {
+                            return url;
+                        }
+
+                        public void setUrl(String url) {
+                            this.url = url;
+                        }
+                    }
+
+                    public OpenUrl getOpenUrl() {
+                        return openUrl;
+                    }
+
+                    public void setOpenUrl(OpenUrl openUrl) {
+                        this.openUrl = openUrl;
+                    }
+                }
+
+                public UrlAction getUrlAction() {
+                    return urlAction;
+                }
+
+                public void setUrlAction(UrlAction urlAction) {
+                    this.urlAction = urlAction;
                 }
 
                 public String getDisplayText() {
@@ -130,6 +154,14 @@ public class ChatBotInfomenuRequest {
 
                 public void setPostback(Postback postback) {
                     this.postback = postback;
+                }
+
+                public DialerAction getDialerAction() {
+                    return dialerAction;
+                }
+
+                public void setDialerAction(DialerAction dialerAction) {
+                    this.dialerAction = dialerAction;
                 }
             }
 

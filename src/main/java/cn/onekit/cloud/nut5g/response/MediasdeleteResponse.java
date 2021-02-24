@@ -1,6 +1,6 @@
 package cn.onekit.cloud.nut5g.response;
-
-public class MediasdeleteResponse extends Nut5GResponse{
+@SuppressWarnings("unused")
+public class MediasdeleteResponse {
     private String deleteMode;
     private int fileCount;
     private int totalCont;

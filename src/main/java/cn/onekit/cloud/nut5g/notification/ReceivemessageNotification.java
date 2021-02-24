@@ -1,7 +1,9 @@
 package cn.onekit.cloud.nut5g.notification;
 
-import java.util.List;
+import cn.onekit.cloud.nut5g.request.MessagesRequest;
 
+import java.util.List;
+@SuppressWarnings("unused")
 public class ReceivemessageNotification {
     private String messageId;
     private List<Message> messageList;
@@ -19,7 +21,11 @@ public class ReceivemessageNotification {
     }
 
     public static abstract class Message{
-        private final ContentType contentType;
+        private final String contentType;
+
+        public Message(ContentType contentType){
+            this.contentType=contentType.toString();
+        }
 
         public enum ContentType{
             text("text/plain"),
@@ -29,14 +35,18 @@ public class ReceivemessageNotification {
             botsharedclientdata("application/vnd.gsma.botsharedclientdata.v1.0+json"),
             geo("text/plain");
 
-            ContentType(String s) {
+            private final String value;
 
+            ContentType(String value) {
+                this.value=value;
+            }
+
+            @Override
+            public String toString() {
+                return value;
             }
         }
 
-        public Message(ContentType contentType){
-this.contentType=contentType;
-        }
 
         private String contentEncoding;
 

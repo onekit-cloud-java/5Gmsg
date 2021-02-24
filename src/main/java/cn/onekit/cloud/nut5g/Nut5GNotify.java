@@ -6,14 +6,14 @@ import cn.onekit.cloud.nut5g.notification.RcsspamNotification;
 import cn.onekit.cloud.nut5g.notification.ReceivemessageNotification;
 import cn.onekit.cloud.nut5g.notification.StatusNotification;
 import cn.onekit.thekit.SIGN;
-import org.apache.http.HttpRequest;
+
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-
+@SuppressWarnings("unused")
 public interface Nut5GNotify {
     default void _checkSign(HttpServletRequest request, String accessToken) throws Exception {
         String signature = request.getParameter("signature");

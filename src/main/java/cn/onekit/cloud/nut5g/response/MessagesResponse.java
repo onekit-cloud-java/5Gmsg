@@ -1,8 +1,8 @@
 package cn.onekit.cloud.nut5g.response;
 
-import cn.onekit.cloud.nut5g.response.Nut5GResponse;
 
-public class MessagesResponse extends Nut5GResponse {
+@SuppressWarnings("unused")
+public class MessagesResponse {
     private String messageId;
     private String conversationId;
     private String contributionId;

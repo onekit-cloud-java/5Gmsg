@@ -1,7 +1,8 @@
 package cn.onekit.cloud.nut5g.request;
 
-import java.util.List;
 
+import java.util.List;
+@SuppressWarnings("unused")
 public class MessagesRequest {
     private String messageId;
     private List<Message> messageList;
@@ -17,6 +18,7 @@ public class MessagesRequest {
     private boolean storeSupported;
     private String smsContent;
 
+
     public enum reportRequest{
         sent,
         failed,
@@ -25,6 +27,7 @@ public class MessagesRequest {
         deliveredToNetwork
     }
 
+    @SuppressWarnings("FieldCanBeLocal")
     public static class ServiceCapability{
         private final String capabilityId = "ChatbotSA";
         private String version;
@@ -43,22 +46,53 @@ public class MessagesRequest {
     }
 
     public static abstract class Message{
-        private final ContentType contentType;
+        private final String contentType;
 
+        public Message(ContentType contentType){
+            this.contentType=contentType.toString();
+        }
         public enum ContentType{
+
+//            public static ContentType parse(String type) {
+//                switch (type) {
+//                    case "text/plain":
+//                        return ContentType.text;
+//                    case "application/vnd.gsma.botsuggestion.v1.0+json":
+//                        return ContentType.botsuggestion;
+//                    case "application/vnd.gsma.botmessage.v1.0+json":
+//                        return ContentType.botmessage;
+//                    case "application/vnd.gsma.rcs-ft-http":
+//                        return ContentType.file;
+//                    case "女":
+//                        return ContentType.geo;
+//                    default:
+//                        throw new IllegalArgumentException("There is not enum names with [" + type + "] of type Gender exists! ");
+//                }
+//            }
+
             text("text/plain"),
             botsuggestion("application/vnd.gsma.botsuggestion.v1.0+json"),
             botmessage("application/vnd.gsma.botmessage.v1.0+json"),
             file("application/vnd.gsma.rcs-ft-http"),
             geo("text/plain");
-            ContentType(String s) {
+            private final String value;
+
+            ContentType(String value) {
+                this.value=value;
             }
+
+            @Override
+            public String toString() {
+                return value;
+            }
+
+
         }
 
         private String contentEncoding;
 
-        public Message(ContentType contentType){
-         this.contentType=contentType;
+        public String getContentType() {
+            return contentType;
         }
 
         public String getContentEncoding() {
@@ -87,6 +121,8 @@ public class MessagesRequest {
     }
 
     public static class BotsuggestionMessage extends Message{
+        private ContentText contentText;
+
         public static class ContentText {
             private List<Suggestion> suggestions;
 
@@ -131,6 +167,30 @@ public class MessagesRequest {
                     private UrlAction urlAction;
                     private String displayText;
                     private Postback postback;
+                    private DialerAction dialerAction;
+
+                    public static class  DialerAction{
+                        private DialPhoneNumber dialPhoneNumber;
+                        public static class DialPhoneNumber{
+                            private String phoneNumber;
+
+                            public String getPhoneNumber() {
+                                return phoneNumber;
+                            }
+
+                            public void setPhoneNumber(String phoneNumber) {
+                                this.phoneNumber = phoneNumber;
+                            }
+                        }
+
+                        public DialPhoneNumber getDialPhoneNumber() {
+                            return dialPhoneNumber;
+                        }
+
+                        public void setDialPhoneNumber(DialPhoneNumber dialPhoneNumber) {
+                            this.dialPhoneNumber = dialPhoneNumber;
+                        }
+                    }
 
                     public static class Postback {
                         private String data;
@@ -167,6 +227,38 @@ public class MessagesRequest {
                             this.openUrl = openUrl;
                         }
                     }
+
+                    public UrlAction getUrlAction() {
+                        return urlAction;
+                    }
+
+                    public void setUrlAction(UrlAction urlAction) {
+                        this.urlAction = urlAction;
+                    }
+
+                    public String getDisplayText() {
+                        return displayText;
+                    }
+
+                    public void setDisplayText(String displayText) {
+                        this.displayText = displayText;
+                    }
+
+                    public Postback getPostback() {
+                        return postback;
+                    }
+
+                    public void setPostback(Postback postback) {
+                        this.postback = postback;
+                    }
+
+                    public DialerAction getDialerAction() {
+                        return dialerAction;
+                    }
+
+                    public void setDialerAction(DialerAction dialerAction) {
+                        this.dialerAction = dialerAction;
+                    }
                 }
 
                 public Reply getReply() {
@@ -186,12 +278,19 @@ public class MessagesRequest {
                 }
             }
 
+            public List<Suggestion> getSuggestions() {
+                return suggestions;
+            }
+
+            public void setSuggestions(List<Suggestion> suggestions) {
+                this.suggestions = suggestions;
+            }
         }
 
         public BotsuggestionMessage() {
             super(ContentType.botsuggestion);
         }
-        private ContentText contentText;
+
 
         public ContentText getContentText() {
             return contentText;
@@ -266,9 +365,21 @@ public class MessagesRequest {
                 this.until = until;
             }
         }
+
+        public List<ContentText> getContentText() {
+            return contentText;
+        }
+
+        public void setContentText(List<ContentText> contentText) {
+            this.contentText = contentText;
+        }
     }
 
     public static class GeoMessage extends Message{
+        public GeoMessage() {
+            super(ContentType.geo);
+        }
+        private ContentText contentText;
         public static class ContentText{
             private float longitude,latitude;
             private String crs;
@@ -280,10 +391,7 @@ public class MessagesRequest {
                 return String.format( "geo:%f,%f;crs=%s;u=%d;rcs-l=%s",longitude,latitude,crs,u,rcs_l);
             }
         }
-        public GeoMessage() {
-            super(ContentType.geo);
-        }
-        private ContentText contentText;
+
 
         public ContentText getContentText() {
             return contentText;
@@ -478,30 +586,52 @@ public class MessagesRequest {
                                 }
                             }
 
-                            public static class Action{
+                            public static class Action {
                                 private UrlAction urlAction;
+                                private String displayText;
                                 private Postback postback;
+                                private DialerAction dialerAction;
+
+                                public static class  DialerAction{
+                                    private DialPhoneNumber dialPhoneNumber;
+                                    public static class DialPhoneNumber{
+                                        private String phoneNumber;
+
+                                        public String getPhoneNumber() {
+                                            return phoneNumber;
+                                        }
+
+                                        public void setPhoneNumber(String phoneNumber) {
+                                            this.phoneNumber = phoneNumber;
+                                        }
+                                    }
+
+                                    public DialPhoneNumber getDialPhoneNumber() {
+                                        return dialPhoneNumber;
+                                    }
+
+                                    public void setDialPhoneNumber(DialPhoneNumber dialPhoneNumber) {
+                                        this.dialPhoneNumber = dialPhoneNumber;
+                                    }
+                                }
 
                                 public static class Postback {
                                     private String data;
 
-                                    public String getPostback() {
+                                    public String getData() {
                                         return data;
                                     }
 
-                                    public void setPostback(String data) {
+                                    public void setData(String data) {
                                         this.data = data;
                                     }
                                 }
 
-                                public static class UrlAction{
+                                public static class UrlAction {
                                     private OpenUrl openUrl;
-                                    private String displayText;
 
-                                    public static class OpenUrl{
+                                    public static class OpenUrl {
                                         private String url;
-                                        private String application;
-                                        private String viewMode;
 
                                         public String getUrl() {
                                             return url;
@@ -510,30 +640,6 @@ public class MessagesRequest {
                                         public void setUrl(String url) {
                                             this.url = url;
                                         }
-
-                                        public String getApplication() {
-                                            return application;
-                                        }
-
-                                        public void setApplication(String application) {
-                                            this.application = application;
-                                        }
-
-                                        public String getViewMode() {
-                                            return viewMode;
-                                        }
-
-                                        public void setViewMode(String viewMode) {
-                                            this.viewMode = viewMode;
-                                        }
-                                    }
-
-                                    public String getDisplayText() {
-                                        return displayText;
-                                    }
-
-                                    public void setDisplayText(String displayText) {
-                                        this.displayText = displayText;
                                     }
 
                                     public OpenUrl getOpenUrl() {
@@ -545,6 +651,22 @@ public class MessagesRequest {
                                     }
                                 }
 
+                                public UrlAction getUrlAction() {
+                                    return urlAction;
+                                }
+
+                                public void setUrlAction(UrlAction urlAction) {
+                                    this.urlAction = urlAction;
+                                }
+
+                                public String getDisplayText() {
+                                    return displayText;
+                                }
+
+                                public void setDisplayText(String displayText) {
+                                    this.displayText = displayText;
+                                }
+
                                 public Postback getPostback() {
                                     return postback;
                                 }
@@ -553,12 +675,12 @@ public class MessagesRequest {
                                     this.postback = postback;
                                 }
 
-                                public UrlAction getUrlAction() {
-                                    return urlAction;
+                                public DialerAction getDialerAction() {
+                                    return dialerAction;
                                 }
 
-                                public void setUrlAction(UrlAction urlAction) {
-                                    this.urlAction = urlAction;
+                                public void setDialerAction(DialerAction dialerAction) {
+                                    this.dialerAction = dialerAction;
                                 }
                             }
 

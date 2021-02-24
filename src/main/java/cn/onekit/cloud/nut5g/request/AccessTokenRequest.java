@@ -1,5 +1,5 @@
 package cn.onekit.cloud.nut5g.request;
-
+@SuppressWarnings("unused")
 public class AccessTokenRequest {
     private String appId;
     private String appKey;

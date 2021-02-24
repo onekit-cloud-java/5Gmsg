@@ -1,7 +1,7 @@
 package cn.onekit.cloud.nut5g.notification;
 
 import java.util.List;
-
+@SuppressWarnings("unused")
 public class StatusNotification {
     private List<DeliveryInfo> deliveryInfoList;
 

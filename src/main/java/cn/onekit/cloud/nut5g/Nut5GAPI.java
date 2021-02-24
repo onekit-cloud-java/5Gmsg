@@ -1,14 +1,13 @@
 package cn.onekit.cloud.nut5g;
 
 
-import cn.onekit.cloud.nut5g.notification.ReceivemessageNotification;
-import cn.onekit.cloud.nut5g.notification.StatusNotification;
+
 import cn.onekit.cloud.nut5g.request.*;
 import cn.onekit.cloud.nut5g.response.*;
-import cn.onekit.thekit.SIGN;
+
 
 import java.util.*;
-
+@SuppressWarnings("unused")
 public interface Nut5GAPI {
 
     AccessTokenResponse accessToken(AccessTokenRequest request) throws Nut5GError;

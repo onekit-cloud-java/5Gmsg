@@ -1,7 +1,7 @@
 package cn.onekit.cloud.nut5g.request;
 
 import java.util.List;
-
+@SuppressWarnings("unused")
 public class ChatBotInfoRequest {
     private String serviceDescription;
     private List<String> category;

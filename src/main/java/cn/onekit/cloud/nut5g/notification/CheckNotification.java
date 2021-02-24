@@ -1,5 +1,5 @@
 package cn.onekit.cloud.nut5g.notification;
-
+@SuppressWarnings("unused")
 public class CheckNotification {
     public enum type{
         chatbotInformation,

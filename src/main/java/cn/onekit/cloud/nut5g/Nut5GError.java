@@ -1,5 +1,5 @@
 package cn.onekit.cloud.nut5g;
-
+@SuppressWarnings("unused")
 public class Nut5GError extends Exception{
     private int errorCode;
     private String errorMessage;

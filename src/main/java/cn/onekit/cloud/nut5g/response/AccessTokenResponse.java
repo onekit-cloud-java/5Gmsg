@@ -1,6 +1,6 @@
 package cn.onekit.cloud.nut5g.response;
-
-public class AccessTokenResponse extends Nut5GResponse{
+@SuppressWarnings("unused")
+public class AccessTokenResponse {
     private String accessToken;
     private String expires;
     private String url;

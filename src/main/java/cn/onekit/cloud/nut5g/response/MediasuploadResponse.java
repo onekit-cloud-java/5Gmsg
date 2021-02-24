@@ -1,8 +1,8 @@
 package cn.onekit.cloud.nut5g.response;
 
 import java.util.List;
-
-public class MediasuploadResponse extends Nut5GResponse{
+@SuppressWarnings("unused")
+public class MediasuploadResponse {
     private List<FileInfo> fileInfo;
     private int fileCount;
     private int totalCount;
