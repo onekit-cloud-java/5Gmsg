@@ -17,9 +17,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 public abstract class Nut5GNotify {
     protected static void _checkSign(HttpServletRequest request, String accessToken) throws Exception {
-        String signature = request.getParameter("signature");
-        String timestamp = request.getParameter("timestamp");
-        String nonce = request.getParameter("nonce");
+        String signature = request.getHeader("signature");
+        String timestamp = request.getHeader("timestamp");
+        String nonce = request.getHeader("nonce");
         List<String> list = Arrays.asList(accessToken, timestamp, nonce);
         list.sort(new Comparator<String>() {
             @Override

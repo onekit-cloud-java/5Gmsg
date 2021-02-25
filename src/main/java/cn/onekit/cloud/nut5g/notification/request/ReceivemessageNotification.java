@@ -1,7 +1,11 @@
 package cn.onekit.cloud.nut5g.notification.request;
 
 import cn.onekit.cloud.nut5g.request.MessagesRequest;
+import cn.onekit.thekit.JSON;
+import com.google.gson.*;
+import com.google.gson.annotations.JsonAdapter;
 
+import java.lang.reflect.Type;
 import java.util.List;
 @SuppressWarnings("unused")
 public class ReceivemessageNotification {
@@ -20,18 +24,41 @@ public class ReceivemessageNotification {
         failed,
         delivered
     }
+    public static class MessageAdapter implements JsonSerializer<Message>, JsonDeserializer<Message> {
 
-    public static abstract class Message{
-        private final String contentType;
-
-        public Message(ContentType contentType){
-            this.contentType=contentType.toString();
+        @Override
+        public Message deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            JsonObject json = (JsonObject) jsonElement;
+            switch (json.get("contentType").getAsString()){
+                case "text/plain":
+                    if(json.get("contentText").getAsString().startsWith("geo")){
+                        return JSON.json2object(json,GeoMessage.class);
+                    }else{
+                        return JSON.json2object(json,TextMessage.class);
+                    }
+                case "application/vnd.gsma.botsuggestion.v1.0+json":
+                    return JSON.json2object(json, BotsuggestionMessage.class);
+                case "application/vnd.gsma.rcs-ft-http":
+                    return JSON.json2object(json, FileMessage.class);
+                case "application/vnd.gsma.botsharedclientdata.v1.0+json":
+                    return JSON.json2object(json, BotsharedclientdataMessage.class);
+                default:
+                    throw new Error();
+            }
         }
+
+        @Override
+        public JsonElement serialize(Message message, Type type, JsonSerializationContext jsonSerializationContext) {
+            return JSON.object2json(this);
+        }
+    }
+    @JsonAdapter(MessageAdapter.class)
+    public static abstract class Message {
 
         public enum ContentType{
             text("text/plain"),
             botsuggestion("application/vnd.gsma.botsuggestion.v1.0+json"),
-            botmessage("application/vnd.gsma.botmessage.v1.0+json"),
+            //botmessage("application/vnd.gsma.botmessage.v1.0+json"),
             file("application/vnd.gsma.rcs-ft-http"),
             botsharedclientdata("application/vnd.gsma.botsharedclientdata.v1.0+json"),
             geo("text/plain");
@@ -46,6 +73,11 @@ public class ReceivemessageNotification {
             public String toString() {
                 return value;
             }
+        }
+        private final String contentType;
+
+        public Message(ContentType contentType){
+            this.contentType=contentType.toString();
         }
 
 
@@ -74,6 +106,7 @@ public class ReceivemessageNotification {
         public void setContentText(String contentText) {
             this.contentText = contentText;
         }
+
     }
 
     public static class FileMessage extends Message {
