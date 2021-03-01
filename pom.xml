@@ -6,7 +6,7 @@
 
     <groupId>cn.onekit.x2x.cloud</groupId>
     <artifactId>nut5g</artifactId>
-    <version>5.0.0</version>
+    <version>5.0.4</version>
     <name>Nut5G</name>
     <url>https://github.com/onekit-cloud-java/nut5g</url>
     <description>nut5g cloud api standard</description>
@@ -27,6 +27,19 @@
     <!--
     mvn clean deploy -P release
     -->
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>

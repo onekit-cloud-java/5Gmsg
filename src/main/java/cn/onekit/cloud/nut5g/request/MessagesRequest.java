@@ -390,6 +390,46 @@ public class MessagesRequest {
             public String toString() {
                 return String.format( "geo:%f,%f;crs=%s;u=%d;rcs-l=%s",longitude,latitude,crs,u,rcs_l);
             }
+
+            public float getLongitude() {
+                return longitude;
+            }
+
+            public void setLongitude(float longitude) {
+                this.longitude = longitude;
+            }
+
+            public float getLatitude() {
+                return latitude;
+            }
+
+            public void setLatitude(float latitude) {
+                this.latitude = latitude;
+            }
+
+            public String getCrs() {
+                return crs;
+            }
+
+            public void setCrs(String crs) {
+                this.crs = crs;
+            }
+
+            public int getU() {
+                return u;
+            }
+
+            public void setU(int u) {
+                this.u = u;
+            }
+
+            public String getRcs_l() {
+                return rcs_l;
+            }
+
+            public void setRcs_l(String rcs_l) {
+                this.rcs_l = rcs_l;
+            }
         }
 
 

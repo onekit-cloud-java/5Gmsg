@@ -5,7 +5,10 @@ import cn.onekit.thekit.JSON;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 @SuppressWarnings("unused")
 public class ReceivemessageNotification {
@@ -183,15 +186,87 @@ public class ReceivemessageNotification {
     }
 
     public static class GeoMessage extends Message {
+        public static class ContentTextAdapter implements JsonSerializer<ContentText>, JsonDeserializer<ContentText> {
+
+            @Override
+            public ContentText deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                return ContentText.parse(jsonElement.toString());
+            }
+
+            @Override
+            public JsonElement serialize(ContentText contentText, Type type, JsonSerializationContext jsonSerializationContext) {
+                return JSON.object2json(contentText);
+            }
+        }
+        @JsonAdapter(ContentTextAdapter.class)
         public static class ContentText{
             private float longitude,latitude;
             private String crs;
             private int u;
             private String rcs_l;
-
             @Override
             public String toString() {
                 return String.format( "geo:%f,%f;crs=%s;u=%d;rcs-l=%s",longitude,latitude,crs,u,rcs_l);
+            }
+           public static ContentText parse(String string) {
+               ContentText contentText = new ContentText();
+               try {
+                   String[] items = string.split(";");
+                   String[] longLat = items[0].split(":")[1].split(",");
+                   float longitude = Float.parseFloat(longLat[0]);
+                   float lantitude = Float.parseFloat(longLat[1]);
+                   String crs = items[1].split("=")[1];
+                   int u = Integer.parseInt(items[2].split("=")[1]);
+                   String rcs_l = items[3].split("=")[1];
+                   contentText.longitude = longitude;
+                   contentText.latitude = lantitude;
+                   contentText.crs = crs;
+                   contentText.u = u;
+                   contentText.rcs_l = URLDecoder.decode(rcs_l,"utf-8");
+               } catch (UnsupportedEncodingException e) {
+                   e.printStackTrace();
+               }
+               return contentText;
+           }
+
+            public float getLongitude() {
+                return longitude;
+            }
+
+            public void setLongitude(float longitude) {
+                this.longitude = longitude;
+            }
+
+            public float getLatitude() {
+                return latitude;
+            }
+
+            public void setLatitude(float latitude) {
+                this.latitude = latitude;
+            }
+
+            public String getCrs() {
+                return crs;
+            }
+
+            public void setCrs(String crs) {
+                this.crs = crs;
+            }
+
+            public int getU() {
+                return u;
+            }
+
+            public void setU(int u) {
+                this.u = u;
+            }
+
+            public String getRcs_l() {
+                return rcs_l;
+            }
+
+            public void setRcs_l(String rcs_l) {
+                this.rcs_l = rcs_l;
             }
         }
         public GeoMessage() {
