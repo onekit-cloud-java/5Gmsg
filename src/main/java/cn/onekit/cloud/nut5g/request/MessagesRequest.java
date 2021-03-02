@@ -415,7 +415,7 @@ public class MessagesRequest {
 
             @Override
             public String toString() {
-                return String.format( "geo:%f,%f;crs=%s;u=%d;rcs-l=%s",longitude,latitude,crs,u, new URLEncoder().encode(rcs_l,  Charset.forName("utf-8")));
+                return String.format( "geo:%f,%f;crs=%s;u=%d;rcs-l=%s",longitude,latitude,crs,u, new URLEncoder().encode(rcs_l,Charset.forName("utf-8")));
             }
 
             public static ContentText parse(String string) {
@@ -503,8 +503,9 @@ public class MessagesRequest {
 
             public static class CssMessage{
                 private GeneralPurposeCard generalPurposeCard;
+                private GeneralPurposeCardCarousel generalPurposeCardCarousel;
 
-                public static class GeneralPurposeCard{
+                public static class GeneralPurposeCardCarousel{
                     private Layout layout;
                     private Content content;
 
@@ -514,6 +515,15 @@ public class MessagesRequest {
                         private List<String> titleFontStyle;
                         private List<String> descriptionFontStyle;
                         private String style;
+                        private String cardWidth;
+
+                        public String getCardWidth() {
+                            return cardWidth;
+                        }
+
+                        public void setCardWidth(String cardWidth) {
+                            this.cardWidth = cardWidth;
+                        }
 
                         public String getCardOrientation() {
                             return cardOrientation;
@@ -677,6 +687,634 @@ public class MessagesRequest {
                                 private String displayText;
                                 private Postback postback;
                                 private DialerAction dialerAction;
+                                private MapAction mapAction;
+                                private CalendarAction calendarAction;
+                                public static class CalendarAction{
+                                    private CreateCalendarEvent createCalendarEvent;
+                                    public static class CreateCalendarEvent{
+                                        private String startTime;
+                                        private String endTime;
+                                        private String title;
+                                        private String description;
+
+                                        public String getStartTime() {
+                                            return startTime;
+                                        }
+
+                                        public void setStartTime(String startTime) {
+                                            this.startTime = startTime;
+                                        }
+
+                                        public String getEndTime() {
+                                            return endTime;
+                                        }
+
+                                        public void setEndTime(String endTime) {
+                                            this.endTime = endTime;
+                                        }
+
+                                        public String getTitle() {
+                                            return title;
+                                        }
+
+                                        public void setTitle(String title) {
+                                            this.title = title;
+                                        }
+
+                                        public String getDescription() {
+                                            return description;
+                                        }
+
+                                        public void setDescription(String description) {
+                                            this.description = description;
+                                        }
+                                    }
+
+                                    public CreateCalendarEvent getCreateCalendarEvent() {
+                                        return createCalendarEvent;
+                                    }
+
+                                    public void setCreateCalendarEvent(CreateCalendarEvent createCalendarEvent) {
+                                        this.createCalendarEvent = createCalendarEvent;
+                                    }
+                                }
+
+                                public CalendarAction getCalendarAction() {
+                                    return calendarAction;
+                                }
+
+                                public void setCalendarAction(CalendarAction calendarAction) {
+                                    this.calendarAction = calendarAction;
+                                }
+
+                                public static class MapAction{
+                                    private ShowLocation showLocation;
+
+                                    public ShowLocation getShowLocation() {
+                                        return showLocation;
+                                    }
+
+                                    public void setShowLocation(ShowLocation showLocation) {
+                                        this.showLocation = showLocation;
+                                    }
+                                    public static class ShowLocation{
+                                        private String fallbackUrl;
+                                        private Location location;
+
+                                        public static class Location{
+                                            private float latitude;
+                                            private float longitude;
+                                            private String label;
+
+                                            public float getLatitude() {
+                                                return latitude;
+                                            }
+
+                                            public void setLatitude(float latitude) {
+                                                this.latitude = latitude;
+                                            }
+
+                                            public float getLongitude() {
+                                                return longitude;
+                                            }
+
+                                            public void setLongitude(float longitude) {
+                                                this.longitude = longitude;
+                                            }
+
+                                            public String getLabel() {
+                                                return label;
+                                            }
+
+                                            public void setLabel(String label) {
+                                                this.label = label;
+                                            }
+                                        }
+
+                                        public String getFallbackUrl() {
+                                            return fallbackUrl;
+                                        }
+
+                                        public void setFallbackUrl(String fallbackUrl) {
+                                            this.fallbackUrl = fallbackUrl;
+                                        }
+
+                                        public Location getLocation() {
+                                            return location;
+                                        }
+
+                                        public void setLocation(Location location) {
+                                            this.location = location;
+                                        }
+                                    }
+                                }
+
+                                public MapAction getMapAction() {
+                                    return mapAction;
+                                }
+
+                                public void setMapAction(MapAction mapAction) {
+                                    this.mapAction = mapAction;
+                                }
+
+                                public static class  DialerAction{
+                                    private DialPhoneNumber dialPhoneNumber;
+                                    public static class DialPhoneNumber{
+                                        private String phoneNumber;
+
+                                        public String getPhoneNumber() {
+                                            return phoneNumber;
+                                        }
+
+                                        public void setPhoneNumber(String phoneNumber) {
+                                            this.phoneNumber = phoneNumber;
+                                        }
+                                    }
+
+                                    public DialPhoneNumber getDialPhoneNumber() {
+                                        return dialPhoneNumber;
+                                    }
+
+                                    public void setDialPhoneNumber(DialPhoneNumber dialPhoneNumber) {
+                                        this.dialPhoneNumber = dialPhoneNumber;
+                                    }
+                                }
+
+                                public static class Postback {
+                                    private String data;
+
+                                    public String getData() {
+                                        return data;
+                                    }
+
+                                    public void setData(String data) {
+                                        this.data = data;
+                                    }
+                                }
+
+                                public static class UrlAction {
+                                    private OpenUrl openUrl;
+
+                                    public static class OpenUrl {
+                                        private String url;
+                                        private String application;
+                                        private String viewMode;
+
+                                        public String getApplication() {
+                                            return application;
+                                        }
+
+                                        public void setApplication(String application) {
+                                            this.application = application;
+                                        }
+
+                                        public String getViewMode() {
+                                            return viewMode;
+                                        }
+
+                                        public void setViewMode(String viewMode) {
+                                            this.viewMode = viewMode;
+                                        }
+
+                                        public String getUrl() {
+                                            return url;
+                                        }
+
+                                        public void setUrl(String url) {
+                                            this.url = url;
+                                        }
+                                    }
+
+                                    public OpenUrl getOpenUrl() {
+                                        return openUrl;
+                                    }
+
+                                    public void setOpenUrl(OpenUrl openUrl) {
+                                        this.openUrl = openUrl;
+                                    }
+                                }
+
+                                public UrlAction getUrlAction() {
+                                    return urlAction;
+                                }
+
+                                public void setUrlAction(UrlAction urlAction) {
+                                    this.urlAction = urlAction;
+                                }
+
+                                public String getDisplayText() {
+                                    return displayText;
+                                }
+
+                                public void setDisplayText(String displayText) {
+                                    this.displayText = displayText;
+                                }
+
+                                public Postback getPostback() {
+                                    return postback;
+                                }
+
+                                public void setPostback(Postback postback) {
+                                    this.postback = postback;
+                                }
+
+                                public DialerAction getDialerAction() {
+                                    return dialerAction;
+                                }
+
+                                public void setDialerAction(DialerAction dialerAction) {
+                                    this.dialerAction = dialerAction;
+                                }
+                            }
+
+                            public Reply getReply() {
+                                return reply;
+                            }
+
+                            public void setReply(Reply reply) {
+                                this.reply = reply;
+                            }
+
+                            public Action getAction() {
+                                return action;
+                            }
+
+                            public void setAction(Action action) {
+                                this.action = action;
+                            }
+                        }
+
+
+
+                        public String getTitle() {
+                            return title;
+                        }
+
+                        public void setTitle(String title) {
+                            this.title = title;
+                        }
+
+                        public String getDescription() {
+                            return description;
+                        }
+
+                        public void setDescription(String description) {
+                            this.description = description;
+                        }
+
+                        public Media getMedia() {
+                            return media;
+                        }
+
+                        public void setMedia(Media media) {
+                            this.media = media;
+                        }
+
+                        public List<Suggestion> getSuggestions() {
+                            return suggestions;
+                        }
+
+                        public void setSuggestions(List<Suggestion> suggestions) {
+                            this.suggestions = suggestions;
+                        }
+                    }
+
+                    public Layout getLayout() {
+                        return layout;
+                    }
+
+                    public void setLayout(Layout layout) {
+                        this.layout = layout;
+                    }
+
+                    public Content getContent() {
+                        return content;
+                    }
+
+                    public void setContent(Content content) {
+                        this.content = content;
+                    }
+                }
+
+                public GeneralPurposeCardCarousel getGeneralPurposeCardCarousel() {
+                    return generalPurposeCardCarousel;
+                }
+
+                public void setGeneralPurposeCardCarousel(GeneralPurposeCardCarousel generalPurposeCardCarousel) {
+                    this.generalPurposeCardCarousel = generalPurposeCardCarousel;
+                }
+
+                public static class GeneralPurposeCard{
+                    private Layout layout;
+                    private Content content;
+
+                    public static class Layout{
+                        private String cardOrientation;
+                        private String imageAlignment;
+                        private List<String> titleFontStyle;
+                        private List<String> descriptionFontStyle;
+                        private String style;
+                        private String cardWidth;
+
+                        public String getCardWidth() {
+                            return cardWidth;
+                        }
+
+                        public void setCardWidth(String cardWidth) {
+                            this.cardWidth = cardWidth;
+                        }
+
+                        public String getCardOrientation() {
+                            return cardOrientation;
+                        }
+
+                        public void setCardOrientation(String cardOrientation) {
+                            this.cardOrientation = cardOrientation;
+                        }
+
+                        public String getImageAlignment() {
+                            return imageAlignment;
+                        }
+
+                        public void setImageAlignment(String imageAlignment) {
+                            this.imageAlignment = imageAlignment;
+                        }
+
+                        public List<String> getTitleFontStyle() {
+                            return titleFontStyle;
+                        }
+
+                        public void setTitleFontStyle(List<String> titleFontStyle) {
+                            this.titleFontStyle = titleFontStyle;
+                        }
+
+                        public List<String> getDescriptionFontStyle() {
+                            return descriptionFontStyle;
+                        }
+
+                        public void setDescriptionFontStyle(List<String> descriptionFontStyle) {
+                            this.descriptionFontStyle = descriptionFontStyle;
+                        }
+
+                        public String getStyle() {
+                            return style;
+                        }
+
+                        public void setStyle(String style) {
+                            this.style = style;
+                        }
+                    }
+
+                    public static class Content{
+                        private String title;
+                        private String description;
+                        private Media media;
+                        private List<Suggestion> suggestions;
+
+                        public static class Media{
+                            private String mediaUrl;
+                            private String mediaContentType;
+                            private String mediaFileSize;
+                            private String thumbnailUrl;
+                            private String thumbnailContentType;
+                            private long thumbnailFileSize;
+                            private String height;
+                            private String contentDescription;
+
+                            public String getMediaUrl() {
+                                return mediaUrl;
+                            }
+
+                            public void setMediaUrl(String mediaUrl) {
+                                this.mediaUrl = mediaUrl;
+                            }
+
+                            public String getMediaContentType() {
+                                return mediaContentType;
+                            }
+
+                            public void setMediaContentType(String mediaContentType) {
+                                this.mediaContentType = mediaContentType;
+                            }
+
+                            public String getMediaFileSize() {
+                                return mediaFileSize;
+                            }
+
+                            public void setMediaFileSize(String mediaFileSize) {
+                                this.mediaFileSize = mediaFileSize;
+                            }
+
+                            public String getThumbnailUrl() {
+                                return thumbnailUrl;
+                            }
+
+                            public void setThumbnailUrl(String thumbnailUrl) {
+                                this.thumbnailUrl = thumbnailUrl;
+                            }
+
+                            public String getThumbnailContentType() {
+                                return thumbnailContentType;
+                            }
+
+                            public void setThumbnailContentType(String thumbnailContentType) {
+                                this.thumbnailContentType = thumbnailContentType;
+                            }
+
+                            public long getThumbnailFileSize() {
+                                return thumbnailFileSize;
+                            }
+
+                            public void setThumbnailFileSize(long thumbnailFileSize) {
+                                this.thumbnailFileSize = thumbnailFileSize;
+                            }
+
+                            public String getHeight() {
+                                return height;
+                            }
+
+                            public void setHeight(String height) {
+                                this.height = height;
+                            }
+
+                            public String getContentDescription() {
+                                return contentDescription;
+                            }
+
+                            public void setContentDescription(String contentDescription) {
+                                this.contentDescription = contentDescription;
+                            }
+                        }
+
+                        public static class Suggestion{
+                            private Reply reply;
+                            private Action action;
+                            public static class Reply{
+                                private String displayText;
+                                private Postback postback;
+
+                                public static class Postback {
+                                    private String data;
+
+                                    public String getData() {
+                                        return data;
+                                    }
+
+                                    public void setData(String data) {
+                                        this.data = data;
+                                    }
+                                }
+
+                                public String getDisplayText() {
+                                    return displayText;
+                                }
+
+                                public void setDisplayText(String displayText) {
+                                    this.displayText = displayText;
+                                }
+
+                                public Postback getPostback() {
+                                    return postback;
+                                }
+
+                                public void setPostback(Postback postback) {
+                                    this.postback = postback;
+                                }
+                            }
+                            public static class Action {
+                                private UrlAction urlAction;
+                                private String displayText;
+                                private Postback postback;
+                                private DialerAction dialerAction;
+                                private MapAction mapAction;
+                                private CalendarAction calendarAction;
+                                public static class CalendarAction{
+                                    private CreateCalendarEvent createCalendarEvent;
+                                    public static class CreateCalendarEvent{
+                                        private String startTime;
+                                        private String endTime;
+                                        private String title;
+                                        private String description;
+
+                                        public String getStartTime() {
+                                            return startTime;
+                                        }
+
+                                        public void setStartTime(String startTime) {
+                                            this.startTime = startTime;
+                                        }
+
+                                        public String getEndTime() {
+                                            return endTime;
+                                        }
+
+                                        public void setEndTime(String endTime) {
+                                            this.endTime = endTime;
+                                        }
+
+                                        public String getTitle() {
+                                            return title;
+                                        }
+
+                                        public void setTitle(String title) {
+                                            this.title = title;
+                                        }
+
+                                        public String getDescription() {
+                                            return description;
+                                        }
+
+                                        public void setDescription(String description) {
+                                            this.description = description;
+                                        }
+                                    }
+
+                                    public CreateCalendarEvent getCreateCalendarEvent() {
+                                        return createCalendarEvent;
+                                    }
+
+                                    public void setCreateCalendarEvent(CreateCalendarEvent createCalendarEvent) {
+                                        this.createCalendarEvent = createCalendarEvent;
+                                    }
+                                }
+
+                                public CalendarAction getCalendarAction() {
+                                    return calendarAction;
+                                }
+
+                                public void setCalendarAction(CalendarAction calendarAction) {
+                                    this.calendarAction = calendarAction;
+                                }
+
+                                public static class MapAction{
+                                     private ShowLocation showLocation;
+
+                                    public ShowLocation getShowLocation() {
+                                        return showLocation;
+                                    }
+
+                                    public void setShowLocation(ShowLocation showLocation) {
+                                        this.showLocation = showLocation;
+                                    }
+                                    public static class ShowLocation{
+                                        private String fallbackUrl;
+                                        private Location location;
+
+                                        public static class Location{
+                                            private float latitude;
+                                            private float longitude;
+                                            private String label;
+
+                                            public float getLatitude() {
+                                                return latitude;
+                                            }
+
+                                            public void setLatitude(float latitude) {
+                                                this.latitude = latitude;
+                                            }
+
+                                            public float getLongitude() {
+                                                return longitude;
+                                            }
+
+                                            public void setLongitude(float longitude) {
+                                                this.longitude = longitude;
+                                            }
+
+                                            public String getLabel() {
+                                                return label;
+                                            }
+
+                                            public void setLabel(String label) {
+                                                this.label = label;
+                                            }
+                                        }
+
+                                        public String getFallbackUrl() {
+                                            return fallbackUrl;
+                                        }
+
+                                        public void setFallbackUrl(String fallbackUrl) {
+                                            this.fallbackUrl = fallbackUrl;
+                                        }
+
+                                        public Location getLocation() {
+                                            return location;
+                                        }
+
+                                        public void setLocation(Location location) {
+                                            this.location = location;
+                                        }
+                                    }
+                                }
+
+                                public MapAction getMapAction() {
+                                    return mapAction;
+                                }
+
+                                public void setMapAction(MapAction mapAction) {
+                                    this.mapAction = mapAction;
+                                }
 
                                 public static class  DialerAction{
                                     private DialPhoneNumber dialPhoneNumber;

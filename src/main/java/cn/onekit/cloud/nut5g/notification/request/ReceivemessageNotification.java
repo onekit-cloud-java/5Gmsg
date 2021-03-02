@@ -53,7 +53,7 @@ public class ReceivemessageNotification {
 
         @Override
         public JsonElement serialize(Message message, Type type, JsonSerializationContext jsonSerializationContext) {
-            return JSON.object2json(this);
+            return JSON.object2json(message);
         }
     }
     @JsonAdapter(MessageAdapter.class)
