@@ -640,7 +640,6 @@ public class MessagesRequest {
                         public static class Suggestion{
                             private Reply reply;
                             private Action action;
-
                             public static class Reply{
                                 private String displayText;
                                 private Postback postback;
@@ -648,11 +647,11 @@ public class MessagesRequest {
                                 public static class Postback {
                                     private String data;
 
-                                    public String getPostback() {
+                                    public String getData() {
                                         return data;
                                     }
 
-                                    public void setPostback(String data) {
+                                    public void setData(String data) {
                                         this.data = data;
                                     }
                                 }
@@ -673,7 +672,6 @@ public class MessagesRequest {
                                     this.postback = postback;
                                 }
                             }
-
                             public static class Action {
                                 private UrlAction urlAction;
                                 private String displayText;
@@ -720,6 +718,24 @@ public class MessagesRequest {
 
                                     public static class OpenUrl {
                                         private String url;
+                                        private String application;
+                                        private String viewMode;
+
+                                        public String getApplication() {
+                                            return application;
+                                        }
+
+                                        public void setApplication(String application) {
+                                            this.application = application;
+                                        }
+
+                                        public String getViewMode() {
+                                            return viewMode;
+                                        }
+
+                                        public void setViewMode(String viewMode) {
+                                            this.viewMode = viewMode;
+                                        }
 
                                         public String getUrl() {
                                             return url;
@@ -788,6 +804,8 @@ public class MessagesRequest {
                                 this.action = action;
                             }
                         }
+
+
 
                         public String getTitle() {
                             return title;

@@ -196,7 +196,9 @@ public class ReceivemessageNotification {
 
             @Override
             public JsonElement serialize(ContentText contentText, Type type, JsonSerializationContext jsonSerializationContext) {
-                return JSON.object2json(contentText);
+                String string = contentText.toString();
+                JsonPrimitive json =  new JsonPrimitive(string);
+                return json;
             }
         }
         @JsonAdapter(ContentTextAdapter.class)
