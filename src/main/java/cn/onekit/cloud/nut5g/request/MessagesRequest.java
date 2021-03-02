@@ -499,15 +499,15 @@ public class MessagesRequest {
         private ContentText contentText;
 
         public static class ContentText{
-            private CssMessage message;
+            private RichMessage message;
 
-            public static class CssMessage{
+            public static class RichMessage{
                 private GeneralPurposeCard generalPurposeCard;
                 private GeneralPurposeCardCarousel generalPurposeCardCarousel;
 
                 public static class GeneralPurposeCardCarousel{
                     private Layout layout;
-                    private Content content;
+                    private List<Content> content;
 
                     public static class Layout{
                         private String cardOrientation;
@@ -575,7 +575,7 @@ public class MessagesRequest {
                         public static class Media{
                             private String mediaUrl;
                             private String mediaContentType;
-                            private String mediaFileSize;
+                            private long mediaFileSize;
                             private String thumbnailUrl;
                             private String thumbnailContentType;
                             private long thumbnailFileSize;
@@ -598,11 +598,11 @@ public class MessagesRequest {
                                 this.mediaContentType = mediaContentType;
                             }
 
-                            public String getMediaFileSize() {
+                            public long getMediaFileSize() {
                                 return mediaFileSize;
                             }
 
-                            public void setMediaFileSize(String mediaFileSize) {
+                            public void setMediaFileSize(long mediaFileSize) {
                                 this.mediaFileSize = mediaFileSize;
                             }
 
@@ -987,11 +987,11 @@ public class MessagesRequest {
                         this.layout = layout;
                     }
 
-                    public Content getContent() {
+                    public List<Content> getContent() {
                         return content;
                     }
 
-                    public void setContent(Content content) {
+                    public void setContent(List<Content> content) {
                         this.content = content;
                     }
                 }
@@ -1074,7 +1074,7 @@ public class MessagesRequest {
                         public static class Media{
                             private String mediaUrl;
                             private String mediaContentType;
-                            private String mediaFileSize;
+                            private long mediaFileSize;
                             private String thumbnailUrl;
                             private String thumbnailContentType;
                             private long thumbnailFileSize;
@@ -1097,11 +1097,11 @@ public class MessagesRequest {
                                 this.mediaContentType = mediaContentType;
                             }
 
-                            public String getMediaFileSize() {
+                            public long getMediaFileSize() {
                                 return mediaFileSize;
                             }
 
-                            public void setMediaFileSize(String mediaFileSize) {
+                            public void setMediaFileSize(long mediaFileSize) {
                                 this.mediaFileSize = mediaFileSize;
                             }
 
@@ -1504,11 +1504,11 @@ public class MessagesRequest {
                 }
             }
 
-            public CssMessage getMessage() {
+            public RichMessage getMessage() {
                 return message;
             }
 
-            public void setMessage(CssMessage message) {
+            public void setMessage(RichMessage message) {
                 this.message = message;
             }
         }
