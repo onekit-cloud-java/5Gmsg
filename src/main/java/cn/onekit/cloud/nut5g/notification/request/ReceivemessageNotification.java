@@ -4,6 +4,7 @@ import cn.onekit.cloud.nut5g.request.MessagesRequest;
 import cn.onekit.thekit.JSON;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -203,6 +204,7 @@ public class ReceivemessageNotification {
             private float longitude,latitude;
             private String crs;
             private int u;
+            @SerializedName("rcs-l")
             private String rcs_l;
             @Override
             public String toString() {

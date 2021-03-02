@@ -1,14 +1,22 @@
 package cn.onekit.cloud.nut5g;
 
+import cn.onekit.cloud.nut5g.request.MessagesRequest;
+import cn.onekit.thekit.JSON;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 public class test {
     public static void main(String[] args) {
-       String string = "geo:50.7311865,7.0914591;crs=gcj02;u=10;rcs-l=Qingfeng%20Steamed%20Dumpling%20Shop%20%F0%9F%8D%9A";
-        String[] items = string.split(";");
-        String crs = items[1].split("=")[1];
-        System.out.println(crs);
+        MessagesRequest.GeoMessage geoMessage = new MessagesRequest.GeoMessage();
+        MessagesRequest.GeoMessage.ContentText contentText = new MessagesRequest.GeoMessage.ContentText();
+        contentText.setLatitude(7.0914591f);
+        contentText.setLongitude(50.7311865f);
+        contentText.setCrs("gcj02");
+        contentText.setU(10);
+        contentText.setRcs_l("Qingfeng Steamed Dumpling Shop \uD83C\uDF5A");
+        geoMessage.setContentText(contentText);
+        System.out.println(JSON.object2string(geoMessage));
 
     }
 }
