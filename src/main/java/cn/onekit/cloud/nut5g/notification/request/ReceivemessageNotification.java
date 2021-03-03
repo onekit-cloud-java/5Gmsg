@@ -40,7 +40,7 @@ public class ReceivemessageNotification {
                     }else{
                         return JSON.json2object(json,TextMessage.class);
                     }
-                case "application/vnd.gsma.botsuggestion.v1.0+json":
+                case "application/vnd.gsma.botsuggestion.response.v1.0+json":
                     return JSON.json2object(json, BotsuggestionMessage.class);
                 case "application/vnd.gsma.rcs-ft-http":
                     return JSON.json2object(json, FileMessage.class);
@@ -61,7 +61,7 @@ public class ReceivemessageNotification {
 
         public enum ContentType{
             text("text/plain"),
-            botsuggestion("application/vnd.gsma.botsuggestion.v1.0+json"),
+            botsuggestion("application/vnd.gsma.botsuggestion.response.v1.0+json"),
             //botmessage("application/vnd.gsma.botmessage.v1.0+json"),
             file("application/vnd.gsma.rcs-ft-http"),
             botsharedclientdata("application/vnd.gsma.botsharedclientdata.v1.0+json"),
