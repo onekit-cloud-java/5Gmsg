@@ -2,6 +2,7 @@ package cn.onekit.cloud.nut5g.notification;
 
 
 import cn.onekit.cloud.nut5g.BadSignException;
+import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.SIGN;
 
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -35,13 +37,15 @@ public abstract class Nut5GNotify {
         }
     }
 
-    protected static String _receiveJson(HttpServletRequest request) throws IOException {
+    public static String _receiveJson(HttpServletRequest request) throws IOException {
         BufferedReader streamReader = new BufferedReader( new InputStreamReader(request.getInputStream(), "UTF-8"));
         StringBuilder responseStrBuilder = new StringBuilder();
         String inputStr;
         while ((inputStr = streamReader.readLine()) != null) {
             responseStrBuilder.append(inputStr);
         }
-        return  responseStrBuilder.toString();
+        String string = responseStrBuilder.toString();
+        FileDB.set("notify",new Date().toString(),string);
+        return  string;
     }
 }
