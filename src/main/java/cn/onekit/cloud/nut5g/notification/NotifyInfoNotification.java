@@ -23,17 +23,17 @@ public class NotifyInfoNotification extends Nut5GNotify{
 
 
     public static void informationChange(HttpServletRequest request,String accessToken) throws Exception{
-        //_checkSign(request,accessToken);
+        _checkSign(request,accessToken);
 
     }
 
     public static RcsspamNotification rcsspam(HttpServletRequest request,String accessToken) throws Exception{
-        //_checkSign(request,accessToken);
+        _checkSign(request,accessToken);
         return JSON.string2object(_receiveJson(request),RcsspamNotification.class);
     }
 
     public static CheckNotification check(HttpServletRequest request,String accessToken) throws Exception {
-        //_checkSign(request,accessToken);
+        _checkSign(request,accessToken);
         return JSON.string2object(_receiveJson(request),CheckNotification.class);
     }
 

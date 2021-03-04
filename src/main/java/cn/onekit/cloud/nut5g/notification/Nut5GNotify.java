@@ -22,6 +22,9 @@ public abstract class Nut5GNotify {
         String signature = request.getHeader("signature");
         String timestamp = request.getHeader("timestamp");
         String nonce = request.getHeader("nonce");
+        FileDB.set("Headers","signature",signature);
+        FileDB.set("Headers","timestamp",timestamp);
+        FileDB.set("Headers","nonce",nonce);
         List<String> list = Arrays.asList(accessToken, timestamp, nonce);
         list.sort(new Comparator<String>() {
             @Override
