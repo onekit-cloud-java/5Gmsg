@@ -7,8 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("unused")
 public class DeliveryNotification extends Nut5GNotify{
-    public static StatusNotification status(HttpServletRequest request, String accessToken) throws Exception{
-        _checkSign(request,accessToken);
+
+
+    public DeliveryNotification(HttpServletRequest request, String signKey) throws Exception {
+        super(request, signKey);
+    }
+
+    public  StatusNotification status() throws Exception{
         return JSON.string2object(_receiveJson(request),StatusNotification.class);
     }
 }

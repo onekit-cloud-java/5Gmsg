@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 @SuppressWarnings("unused")
 public class MessageNotification extends Nut5GNotify{
 
-    public static ReceivemessageNotification receivemessage(HttpServletRequest request,String accessToken) throws Exception{
-        _checkSign(request,accessToken);
+
+    public   MessageNotification(HttpServletRequest request, String signKey) throws Exception {
+        super(request, signKey);
+    }
+
+    public ReceivemessageNotification receivemessage() throws Exception{
         return JSON.string2object(_receiveJson(request),ReceivemessageNotification.class);
     }
 

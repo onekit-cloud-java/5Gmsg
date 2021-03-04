@@ -21,19 +21,20 @@ import java.util.List;
 public class NotifyInfoNotification extends Nut5GNotify{
 
 
+    public  NotifyInfoNotification(HttpServletRequest request, String signKey) throws Exception {
+        super(request, signKey);
+    }
 
-    public static void informationChange(HttpServletRequest request,String accessToken) throws Exception{
-        _checkSign(request,accessToken);
+    public   void informationChange() throws Exception{
+
 
     }
 
-    public static RcsspamNotification rcsspam(HttpServletRequest request,String accessToken) throws Exception{
-        _checkSign(request,accessToken);
+    public  RcsspamNotification rcsspam() throws Exception{
         return JSON.string2object(_receiveJson(request),RcsspamNotification.class);
     }
 
-    public static CheckNotification check(HttpServletRequest request,String accessToken) throws Exception {
-        _checkSign(request,accessToken);
+    public  CheckNotification check() throws Exception {
         return JSON.string2object(_receiveJson(request),CheckNotification.class);
     }
 

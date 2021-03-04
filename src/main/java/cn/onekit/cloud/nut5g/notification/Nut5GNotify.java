@@ -2,36 +2,44 @@ package cn.onekit.cloud.nut5g.notification;
 
 
 import cn.onekit.cloud.nut5g.BadSignException;
+import cn.onekit.thekit.AJAX;
 import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.SIGN;
-
 
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("unused")
 public abstract class Nut5GNotify {
-    protected static void _checkSign(HttpServletRequest request, String accessToken) throws Exception {
+    protected final String signKey;
+    protected  HttpServletRequest request;
+    Nut5GNotify(HttpServletRequest request,String signKey) throws Exception {
+        this.request=request;
+        this.signKey=signKey;
+        _checkSign(request);
+    }
+
+    protected  void _checkSign(HttpServletRequest request) throws Exception {
         String signature = request.getHeader("signature");
         String timestamp = request.getHeader("timestamp");
         String nonce = request.getHeader("nonce");
-        FileDB.set("Headers","signature",signature);
-        FileDB.set("Headers","timestamp",timestamp);
-        FileDB.set("Headers","nonce",nonce);
-        List<String> list = Arrays.asList(accessToken, timestamp, nonce);
-        list.sort(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o1);
+        StringBuilder sb = new StringBuilder();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while(headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            Enumeration<String> headerValues = request.getHeaders(headerName);
+            while(headerValues.hasMoreElements()) {
+                String headerValue = headerValues.nextElement();
+                sb.append(String.format("%s=%s;",headerName,headerValue));
             }
-        });
+        }
+        FileDB.set("Headers", new Date().toString(), sb.toString());
+        List<String> list = Arrays.asList(signKey, timestamp, nonce);
+        Collections.sort(list);
         String str = String.join("", list);
 
 
@@ -40,14 +48,8 @@ public abstract class Nut5GNotify {
         }
     }
 
-    public static String _receiveJson(HttpServletRequest request) throws IOException {
-        BufferedReader streamReader = new BufferedReader( new InputStreamReader(request.getInputStream(), "UTF-8"));
-        StringBuilder responseStrBuilder = new StringBuilder();
-        String inputStr;
-        while ((inputStr = streamReader.readLine()) != null) {
-            responseStrBuilder.append(inputStr);
-        }
-        String string = responseStrBuilder.toString();
+    public  String _receiveJson(HttpServletRequest request) throws IOException {
+        String string  = AJAX.reveive(request);
         FileDB.set("notify",new Date().toString(),string);
         return  string;
     }
