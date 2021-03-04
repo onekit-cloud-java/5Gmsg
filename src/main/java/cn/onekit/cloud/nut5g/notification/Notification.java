@@ -14,12 +14,12 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 @SuppressWarnings("unused")
-public abstract class Nut5GNotify {
-    protected final String signKey;
+public abstract class Notification {
+    protected final String token;
     protected  HttpServletRequest request;
-    Nut5GNotify(HttpServletRequest request,String signKey) throws Exception {
+    Notification(HttpServletRequest request, String token) throws Exception {
         this.request=request;
-        this.signKey=signKey;
+        this.token=token;
         _checkSign(request);
     }
 
@@ -38,7 +38,7 @@ public abstract class Nut5GNotify {
             }
         }
         FileDB.set("Headers", new Date().toString(), sb.toString());
-        List<String> list = Arrays.asList(signKey, timestamp, nonce);
+        List<String> list = Arrays.asList(token, timestamp, nonce);
         Collections.sort(list);
         String str = String.join("", list);
 

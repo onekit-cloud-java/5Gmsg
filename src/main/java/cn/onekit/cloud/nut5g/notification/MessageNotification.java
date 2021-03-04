@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @SuppressWarnings("unused")
-public class MessageNotification extends Nut5GNotify{
+public class MessageNotification extends Notification {
 
 
-    public   MessageNotification(HttpServletRequest request, String signKey) throws Exception {
-        super(request, signKey);
+    public   MessageNotification(HttpServletRequest request, String token) throws Exception {
+        super(request, token);
     }
 
     public ReceivemessageNotification receivemessage() throws Exception{

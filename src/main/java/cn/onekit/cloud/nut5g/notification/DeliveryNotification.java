@@ -6,11 +6,11 @@ import cn.onekit.thekit.JSON;
 import javax.servlet.http.HttpServletRequest;
 
 @SuppressWarnings("unused")
-public class DeliveryNotification extends Nut5GNotify{
+public class DeliveryNotification extends Notification {
 
 
-    public DeliveryNotification(HttpServletRequest request, String signKey) throws Exception {
-        super(request, signKey);
+    public DeliveryNotification(HttpServletRequest request, String token) throws Exception {
+        super(request, token);
     }
 
     public  StatusNotification status() throws Exception{

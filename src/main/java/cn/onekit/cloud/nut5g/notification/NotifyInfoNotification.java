@@ -4,28 +4,19 @@ package cn.onekit.
 
 import cn.onekit.cloud.nut5g.notification.request.CheckNotification;
 import cn.onekit.cloud.nut5g.notification.request.RcsspamNotification;
-import cn.onekit.cloud.nut5g.notification.request.ReceivemessageNotification;
-import cn.onekit.cloud.nut5g.notification.request.StatusNotification;
 import cn.onekit.thekit.JSON;
-import cn.onekit.thekit.SIGN;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 
 @SuppressWarnings("unused")
-public class NotifyInfoNotification extends Nut5GNotify{
+public class NotifyInfoNotification extends Notification {
 
 
-    public  NotifyInfoNotification(HttpServletRequest request, String signKey) throws Exception {
-        super(request, signKey);
+    public  NotifyInfoNotification(HttpServletRequest request, String token) throws Exception {
+        super(request, token);
     }
 
-    public   void informationChange() throws Exception{
+    public  void informationChange() throws Exception{
 
 
     }
