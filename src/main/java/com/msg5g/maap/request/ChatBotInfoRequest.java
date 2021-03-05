@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g.request;
+package com.msg5g.maap.request;
 
 import java.util.List;
 @SuppressWarnings("unused")

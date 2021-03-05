@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g.request;
+package com.msg5g.maap.request;
 @SuppressWarnings("unused")
 public class AccessTokenRequest {
     private String appId;

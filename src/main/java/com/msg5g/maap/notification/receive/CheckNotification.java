@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g.notification.request;
+package com.msg5g.maap.notification.receive;
 @SuppressWarnings("unused")
 public class CheckNotification {
     public enum Type{

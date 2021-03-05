@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g;
+package com.msg5g.maap;
 
 public class BadSignException extends Exception{
 }

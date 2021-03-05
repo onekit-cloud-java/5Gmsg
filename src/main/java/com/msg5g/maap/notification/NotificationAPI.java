@@ -1,29 +1,18 @@
-package cn.onekit.cloud.nut5g.notification;
+package com.msg5g.maap.notification;
 
 
-import cn.onekit.cloud.nut5g.BadSignException;
-import cn.onekit.thekit.AJAX;
-import cn.onekit.thekit.FileDB;
 import cn.onekit.thekit.SIGN;
-
+import com.msg5g.maap.BadSignException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
-@SuppressWarnings("unused")
-public abstract class Notification {
-    protected final String token;
-    protected  HttpServletRequest request;
-    Notification(HttpServletRequest request, String token) throws Exception {
-        this.request=request;
-        this.token=token;
-        _checkSign(request);
-    }
 
-    protected  void _checkSign(HttpServletRequest request) throws Exception {
+@SuppressWarnings("unused")
+public interface  NotificationAPI {
+
+
+    default void _checkSign(HttpServletRequest request,String token) throws Exception {
         String signature = request.getHeader("signature");
         String timestamp = request.getHeader("timestamp");
         String nonce = request.getHeader("nonce");
@@ -37,7 +26,7 @@ public abstract class Notification {
                 sb.append(String.format("%s=%s;",headerName,headerValue));
             }
         }
-        FileDB.set("Headers", new Date().toString(), sb.toString());
+        //FileDB.set("Headers", new Date().toString(), sb.toString());
         List<String> list = Arrays.asList(token, timestamp, nonce);
         Collections.sort(list);
         String str = String.join("", list);
@@ -48,9 +37,5 @@ public abstract class Notification {
         }
     }
 
-    public  String _receiveJson(HttpServletRequest request) throws IOException {
-        String string  = AJAX.reveive(request);
-        FileDB.set("notify",new Date().toString(),string);
-        return  string;
-    }
+
 }

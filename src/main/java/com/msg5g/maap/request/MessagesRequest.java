@@ -1,8 +1,6 @@
-package cn.onekit.cloud.nut5g.request;
+package com.msg5g.maap.request;
 
 
-import cn.onekit.cloud.nut5g.notification.request.ReceivemessageNotification;
-import cn.onekit.thekit.JSON;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -59,7 +57,7 @@ public class MessagesRequest {
     public static abstract class Message{
         private final String contentType;
 
-        public Message(ContentType contentType){
+        public Message(Message.ContentType contentType){
             this.contentType=contentType.toString();
         }
         public enum ContentType{
@@ -118,7 +116,7 @@ public class MessagesRequest {
     public static class TextMessage extends Message{
 
         public TextMessage() {
-            super(ContentType.text);
+            super(Message.ContentType.text);
         }
         private String contentText;
 
@@ -315,7 +313,7 @@ public class MessagesRequest {
     public static class FileMessage extends Message{
 
         public FileMessage() {
-            super(ContentType.file);
+            super(Message.ContentType.file);
         }
 
         private List<ContentText> contentText;
@@ -394,8 +392,8 @@ public class MessagesRequest {
         public static class ContentTextAdapter implements JsonSerializer<ContentText>, JsonDeserializer<ContentText> {
 
             @Override
-            public ContentText deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                return ContentText.parse(jsonElement.getAsString());
+            public GeoMessage.ContentText deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                return GeoMessage.ContentText.parse(jsonElement.getAsString());
             }
 
             @Override
@@ -418,7 +416,7 @@ public class MessagesRequest {
                 return String.format( "geo:%f,%f;crs=%s;u=%d;rcs-l=%s",longitude,latitude,crs,u, new URLEncoder().encode(rcs_l,Charset.forName("utf-8")));
             }
 
-            public static ContentText parse(String string) {
+            public static GeoMessage.ContentText parse(String string) {
                 ContentText contentText = new ContentText();
                 try {
                     String[] items = string.split(";");

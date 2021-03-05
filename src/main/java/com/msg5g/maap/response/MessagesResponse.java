@@ -1,4 +1,4 @@
-package cn.onekit.cloud.nut5g.response;
+package com.msg5g.maap.response;
 
 
 @SuppressWarnings("unused")

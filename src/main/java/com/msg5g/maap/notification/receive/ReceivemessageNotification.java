@@ -1,6 +1,5 @@
-package cn.onekit.cloud.nut5g.notification.request;
+package com.msg5g.maap.notification.receive;
 
-import cn.onekit.cloud.nut5g.request.MessagesRequest;
 import cn.onekit.thekit.JSON;
 import com.google.gson.*;
 import com.google.gson.annotations.JsonAdapter;
@@ -9,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.List;
 @SuppressWarnings("unused")
 public class ReceivemessageNotification {
